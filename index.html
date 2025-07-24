@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SP PRODUCTION BOOKS HUB</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(to right, #1f1c2c, #928dab);
+        color: white;
+        padding: 2rem;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      h1 {
+        font-size: 3rem;
+        font-weight: 600;
+      }
+      p {
+        font-size: 1.2rem;
+        color: #ccc;
+      }
+      .search-filter {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .search-filter input,
+      .search-filter select {
+        padding: 0.6rem;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+      }
+      .books {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+      .book-card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1rem;
+        border-radius: 1rem;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
+      }
+      .book-card:hover {
+        transform: translateY(-5px);
+      }
+      .book-cover {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      .book-info {
+        margin-top: 1rem;
+      }
+      .book-info h3 {
+        font-size: 1.2rem;
+      }
+      .book-info p {
+        font-size: 0.9rem;
+        color: #aaa;
+      }
+      .tags {
+        margin: 0.5rem 0;
+        font-size: 0.8rem;
+        color: #9ae;
+      }
+      .rating {
+        color: gold;
+        font-size: 1rem;
+      }
+      .download-btn {
+        margin-top: 0.5rem;
+        background: #ff4d4d;
+        border: none;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .upload-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #00e676;
+        color: white;
+        font-size: 2rem;
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        z-index: 1000;
+      }
+      .upload-form {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        z-index: 999;
+        justify-content: center;
+        align-items: center;
+      }
+      .form-box {
+        background: #222;
+        padding: 2rem;
+        border-radius: 1rem;
+        max-width: 500px;
+        width: 100%;
+      }
+      .form-box h2 {
+        margin-bottom: 1rem;
+      }
+      .form-box input,
+      .form-box select {
+        width: 100%;
+        margin-bottom: 1rem;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 10px;
+      }
+      .form-box button {
+        background: #6200ea;
+        color: white;
+        border: none;
+        padding: 0.7rem 1.5rem;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      footer {
+        text-align: center;
+        margin-top: 4rem;
+        font-size: 0.9rem;
+        color: #999;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>SP PRODUCTION BOOKS HUB</h1>
+      <p>Free E-books Download and Learn by SP PRODUCTION</p>
+    </header>
+    <div class="search-filter">
+      <input type="text" placeholder="Search by title or author..." />
+      <select>
+        <option value="">All Categories</option>
+        <option>Programming</option>
+        <option>Fiction</option>
+        <option>Business</option>
+        <option>Science</option>
+      </select>
+    </div>
+    <section class="books" id="book-list">
+      <!-- Book cards inserted by Firebase later -->
+      <div class="book-card">
+        <img src="cover-example.jpg" alt="Book Cover" class="book-cover" />
+        <div class="book-info">
+          <h3>Sample Book Title</h3>
+          <p>Author: John Doe</p>
+          <div class="tags">Programming</div>
+          <div class="rating">⭐⭐⭐⭐☆</div>
+          <button class="download-btn">Download PDF</button>
+        </div>
+      </div>
+    </section>
+    <button
+      class="upload-btn"
+      onclick="document.querySelector('.upload-form').style.display='flex'"
+    >
+      +
+    </button>
+    <div class="upload-form" onclick="this.style.display='none'">
+      <div class="form-box" onclick="event.stopPropagation()">
+        <h2>Upload Book</h2>
+        <input type="text" placeholder="Book Title" />
+        <input type="text" placeholder="Author Name" />
+        <input type="text" placeholder="Uploader Name" />
+        <select>
+          <option>Programming</option>
+          <option>Fiction</option>
+          <option>Business</option>
+          <option>Science</option>
+        </select>
+        <input type="file" accept=".pdf" />
+        <input type="text" placeholder="Optional Download Link" />
+        <input type="number" placeholder="Rating (1-5)" max="5" />
+        <button>Upload</button>
+      </div>
+    </div>
+    <footer>
+      Copyright ©️ SP PRODUCTION INC – MANAGED BY SP PRODUCTION INC
+    </footer>
+  </body>
+</html>
